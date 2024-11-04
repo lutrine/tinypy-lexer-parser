@@ -1,0 +1,7 @@
+{
+  "conventionalCommits.scopes": [
+    "gui",
+    "lexer",
+    "parser"
+  ]
+}
