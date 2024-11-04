@@ -22,21 +22,21 @@ def cut_one_line_tokens(line):
             break
         if op.match(line):  # check for operators
             lex = op.match(line)
-            tup = "<Operator," + lex.group(0) + ">"
+            tup = "<operator," + lex.group(0) + ">"
             output.append(tup)
             line = line[lex.end() :]
 
         elif key.match(line):  # check for Identifiers
             lex = key.match(line)
             tup = (
-                "<Keyword," + lex.group(0) + ">"
+                "<keyword," + lex.group(0) + ">"
             )  # [match object].group(0) is the actual thing the regex formula found in its entirety
             output.append(tup)
             line = line[lex.end() :]
 
         elif sep.match(line):  # check for separators
             lex = sep.match(line)
-            tup = "<Separator," + lex.group(0) + ">"
+            tup = "<separator," + lex.group(0) + ">"
             output.append(tup)
             line = line[lex.end() :]
             if lex.group(0) == '"':
@@ -44,27 +44,27 @@ def cut_one_line_tokens(line):
                     line
                 ):  # if a " separator is found, look for another " and all characters inbetween are a String_Literal
                     relex = str_lit.search(line)
-                    retup = "<String_Literal," + line[: relex.start()] + ">"
+                    retup = "<string_literal," + line[: relex.start()] + ">"
                     output.append(retup)
-                    reretup = "<Separator," + relex.group(0) + ">"
+                    reretup = "<separator," + relex.group(0) + ">"
                     output.append(reretup)
                     line = line[relex.end() :]
 
         elif iden.match(line):  # check for Identifier
             lex = iden.match(line)
-            tup = "<Identifier," + lex.group(0) + ">"
+            tup = "<identifier," + lex.group(0) + ">"
             output.append(tup)
             line = line[lex.end() :]
 
         elif flo.match(line):  # check for Float_Literal
             lex = flo.match(line)
-            tup = "<Float_Literal," + lex.group(0) + ">"
+            tup = "<float_Literal," + lex.group(0) + ">"
             output.append(tup)
             line = line[lex.end() :]
 
         elif int_lit.match(line):  # look for Int_Literal
             lex = int_lit.match(line)
-            tup = "<Int_Literal," + lex.group(0) + ">"
+            tup = "<int_lWiteral," + lex.group(0) + ">"
             output.append(tup)
             line = line[lex.end() :]
 
