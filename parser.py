@@ -228,7 +228,7 @@ def exp():
 def parser(tokens):
     global intoken
     global tokenlist
-    tokenlist = tokens
+    tokenlist = cleanup(tokens)
     intoken = tokenlist.pop(0)
     exp()
     accept_token()
@@ -237,4 +237,11 @@ def parser(tokens):
     return
 
 def cleanup(tokens):
-    return
+    cleanlist = []
+    for x in tokens:
+        temp = x[1:-1].split(",")
+        tup = (temp[0],temp[1])
+        cleanlist.append(tup)
+
+    return cleanlist
+
