@@ -40,8 +40,8 @@ def math():
 def multi():
     print("\tParent node multi, finding child nodes")
     global intoken
-    if intoken[0] == "Int_Literal":
-        print("child node (internal): Int_Literal")
+    if intoken[0] == "int_literal":
+        print("child node (internal): int_literal")
         print("   int_literal has child node (token):" + intoken[1])
         accept_token()
         if intoken[1] == "*":
@@ -52,8 +52,8 @@ def multi():
             multi()
         else:
             print("multi expects a '*' after an int_literal")
-    elif intoken[0] == "Float_Literal":
-        print("child node (internal): Float_Literal")
+    elif intoken[0] == "float_literal":
+        print("child node (internal): float_literal")
         print("   float_literal has child node (token):" + intoken[1])
     else:
         print("multi expects a int or a float")
@@ -63,20 +63,20 @@ def math_exp():
     print("\n----parent node math_exp, finding children nodes:")
     global intoken
     typeT, token = intoken
-    if typeT == "Keyword":
-        print("child node (internal): Keyword")
+    if typeT == "keyword":
+        print("child node (internal): keyword")
         print("   type has child node (token):" + token)
         accept_token()
     else:
         print("expect Keyword as the first element of the math_expression!\n")
         return
 
-    if intoken[0] == "Identifier":
-        print("child node (internal): Identifier")
-        print("   Identifier has child node (token):" + intoken[1])
+    if intoken[0] == "identifier":
+        print("child node (internal): identifier")
+        print("   identifier has child node (token):" + intoken[1])
         accept_token()
     else:
-        print("expect Identifier as the second element of the math_expression!")
+        print("expect identifier as the second element of the math_expression!")
         return
 
     if intoken[1] == "=":
@@ -94,16 +94,16 @@ def if_exp():
     global intoken
     typeT, token = intoken
 
-    if typeT == "Keyword":
-        print("child node (internal): Keyword")
+    if typeT == "keyword":
+        print("child node (internal): keyword")
         print("   keyword has child node (token):" + token)
         accept_token()
     else:
-        print("expect Keyword as the first element of the if_expression!\n")
+        print("expect keyword as the first element of the if_expression!\n")
         return
 
     if intoken[1] == "(":
-        print("child node (internal): Separator")
+        print("child node (internal): separator")
         print("   separator has child node (token):" + intoken[1])
         accept_token()
     else:
@@ -115,7 +115,7 @@ def if_exp():
     accept_token()
 
     if intoken[1] == ")":
-        print("child node (internal): Separator")
+        print("child node (internal): separator")
         print("   separator has child node (token):" + intoken[1])
     else:
         print("expect ) as the fourth element of the if_expression!")
@@ -126,24 +126,24 @@ def comparison_exp():
     global intoken
     typeT, token = intoken
 
-    if typeT == "Identifier":
-        print("child node (internal): Identifier")
+    if typeT == "identifier":
+        print("child node (internal): identifier")
         print("   identifier has child node (token):" + token)
         accept_token()
     else:
-        print("expect Identifier as the first element of the comparison_expression!\n")
+        print("expect identifier as the first element of the comparison_expression!\n")
         return
 
     if intoken[1] == ">":
-        print("child node (internal): Operator")
+        print("child node (internal): operator")
         print("   operator has child node (token):" + intoken[1])
         accept_token()
     else:
         print("expect operator > as the second element of the comparison_expression!\n")
         return
 
-    if typeT == "Identifier":
-        print("child node (internal): Identifier")
+    if typeT == "identifier":
+        print("child node (internal): identifier")
         print("   identifier has child node (token):" + token)
         accept_token()
     else:
@@ -155,16 +155,16 @@ def print_exp():
     global intoken
     typeT, token = intoken
 
-    if typeT == "Identifier" and token == "print":
-        print("child node (internal): Identifier")
+    if typeT == "identifier" and token == "print":
+        print("child node (internal): identifier")
         print("   keyword has child node (token):" + token)
         accept_token()
     else:
-        print("expect Identifier print as the first element of the print_expression!\n")
+        print("expect identifier print as the first element of the print_expression!\n")
         return
 
     if intoken[1] == "(":
-        print("child node (internal): Separator")
+        print("child node (internal): separator")
         print("   separator has child node (token):" + intoken[1])
         accept_token()
     else:
@@ -172,15 +172,15 @@ def print_exp():
         return
 
     if intoken[1] == "\"":
-        print("child node (internal): Separator")
+        print("child node (internal): separator")
         print("   separator has child node (token):" + intoken[1])
         accept_token()
     else:
         print("expect \" as the third element of the print_expression!")
         return
 
-    if intoken[0] == "String_Literal":
-        print("child node (internal): String_Literal")
+    if intoken[0] == "string_literal":
+        print("child node (internal): string_literal")
         print("   separator has child node (token):" + intoken[1])
         accept_token()
     else:
@@ -188,7 +188,7 @@ def print_exp():
         return
 
     if intoken[1] == "\"":
-        print("child node (internal): Separator")
+        print("child node (internal): separator")
         print("   separator has child node (token):" + intoken[1])
         accept_token()
     else:
@@ -196,7 +196,7 @@ def print_exp():
         return
 
     if intoken[1] == ")":
-        print("child node (internal): Separator")
+        print("child node (internal): separator")
         print("   separator has child node (token):" + intoken[1])
     else:
         print("expect ) as the sixth element of the print_expression!")
@@ -206,8 +206,8 @@ def exp():
     print("\n----parent node exp, finding children nodes:")
     global intoken
     typeT, token = intoken
-    if typeT == "Keyword":
-        print("child node (internal): Keyword")
+    if typeT == "keyword":
+        print("child node (internal): keyword")
         print("   keyword has child node (token):" + token)
         if token == "float":
             math_exp()
@@ -216,9 +216,9 @@ def exp():
         else:
             print("expect float or if as the first keyword of the expression!")
             return
-    elif typeT == "Identifier":
+    elif typeT == "identifier":
         if token == "print":
-            print("child node (internal): Identifier")
+            print("child node (internal): identifier")
             print("   identifier has child node (token):" + token)
             print_exp()
     else:

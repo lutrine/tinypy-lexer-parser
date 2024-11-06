@@ -64,7 +64,7 @@ def cut_one_line_tokens(line):
 
         elif int_lit.match(line):  # look for Int_Literal
             lex = int_lit.match(line)
-            tup = "<int_lWiteral," + lex.group(0) + ">"
+            tup = "<int_literal," + lex.group(0) + ">"
             output.append(tup)
             line = line[lex.end() :]
 
