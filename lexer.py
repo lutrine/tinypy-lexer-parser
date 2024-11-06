@@ -40,9 +40,7 @@ def cut_one_line_tokens(line):
             output.append(tup)
             line = line[lex.end() :]
             if lex.group(0) == '"':
-                if str_lit.search(
-                    line
-                ):  # if a " separator is found, look for another " and all characters inbetween are a String_Literal
+                if str_lit.search(line):  # if a " separator is found, look for another " and all characters inbetween are a String_Literal
                     relex = str_lit.search(line)
                     retup = "<string_literal," + line[: relex.start()] + ">"
                     output.append(retup)
@@ -58,7 +56,7 @@ def cut_one_line_tokens(line):
 
         elif flo.match(line):  # check for Float_Literal
             lex = flo.match(line)
-            tup = "<float_Literal," + lex.group(0) + ">"
+            tup = "<float_literal," + lex.group(0) + ">"
             output.append(tup)
             line = line[lex.end() :]
 

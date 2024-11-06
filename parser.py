@@ -11,9 +11,7 @@
 
 # print_exp -> print ( " String_Literal " );
 
-# tokenlist = [("Keyword", "float"), ("Identifier", "var2"), ("Operator", "="), ("Int_Literal", "2"), ("Operator", "*"), ("Float_Literal", "1.1"),
-#              ("Operator", "+"), ("Int_Literal", "4"), ("Operator", "*"), ("Int_Literal", "3"), ("Operator", "*"),
-#              ("Float_Literal", "2.3"), ("Seperator", ";")]
+test = ['<identifier,print>', '<separator,(>', '<separator,">', '<string_literal,I just built some parse trees>', '<separator,">', '<separator,)>', '<separator,;>']
 tokenlist = []
 intoken = [("empty", "empty")]
 
@@ -90,7 +88,7 @@ def math_exp():
     math()
 
 def if_exp():
-    print("\n----parent node math_exp, finding children nodes:")
+    print("\n----parent node if_exp, finding children nodes:")
     global intoken
     typeT, token = intoken
 
@@ -112,7 +110,6 @@ def if_exp():
 
     print("Child node (internal): comparison_exp")
     comparison_exp()
-    accept_token()
 
     if intoken[1] == ")":
         print("child node (internal): separator")
@@ -122,7 +119,7 @@ def if_exp():
         return
 
 def comparison_exp():
-    print("\n----parent node math_exp, finding children nodes:")
+    print("\n----parent node comparison_exp, finding children nodes:")
     global intoken
     typeT, token = intoken
 
@@ -151,7 +148,7 @@ def comparison_exp():
         return
 
 def print_exp():
-    print("\n----parent node math_exp, finding children nodes:")
+    print("\n----parent node print_exp, finding children nodes:")
     global intoken
     typeT, token = intoken
 
@@ -209,9 +206,9 @@ def exp():
     if typeT == "keyword":
         print("child node (internal): keyword")
         print("   keyword has child node (token):" + token)
-        if token == "float":
+        if intoken[1] == "float":
             math_exp()
-        elif token == "if":
+        elif intoken[1] == "if":
             if_exp()
         else:
             print("expect float or if as the first keyword of the expression!")
@@ -231,9 +228,14 @@ def parser(tokens):
     tokenlist = cleanup(tokens)
     intoken = tokenlist.pop(0)
     exp()
-    accept_token()
-    if intoken[1] == ";" or intoken[1] == ":":
-        print("\nparse tree building success!")
+    try:
+        accept_token()
+    except:
+        print("Error: No ; or :")
+    else:
+        if intoken[1] == ";" or intoken[1] == ":":
+            print("\nparse tree building success!")
+
     return
 
 def cleanup(tokens):
@@ -245,3 +247,4 @@ def cleanup(tokens):
 
     return cleanlist
 
+parser(test)
