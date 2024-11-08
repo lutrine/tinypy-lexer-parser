@@ -340,7 +340,7 @@ def next_line():
 
 
 root = tk.Tk()
-root.title("Lexical Analyzer for TinyPie")
+root.title("Lexical Analyzer and Parser for TinyPie")
 root.bind("<Escape>", lambda e: root.quit())
 
 # Parent frame
